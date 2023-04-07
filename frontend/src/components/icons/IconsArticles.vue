@@ -1,7 +1,7 @@
 
 <template>
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 21 21">
-        <g fill="none" fillRule="evenodd" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round">
+        <g fill="none" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round">
             <path d="M18.5 6.59c-1.333-.726-2.667-1.09-4-1.09s-2.667.364-4 1.09v9.91c1.333-.667 2.667-1 4-1s2.667.333 4 1z">
             </path>
             <path
@@ -9,8 +9,9 @@
             </path>
             <path d="M10.5 6.59c-1.333-.726-2.667-1.09-4-1.09s-2.667.364-4 1.09v9.91c1.333-.667 2.667-1 4-1s2.667.333 4 1z">
             </path>
-    </g>
-</svg></template>
+        </g>
+    </svg>
+</template>
   
 <script>
 export default {

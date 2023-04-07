@@ -1,9 +1,20 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session, joinedload
+from typing import Optional, List
+from db.database import get_db
+from schemas import ArticleDisplay
+from db.models import Article, Tag, articles_tags
 
 router = APIRouter(prefix='/articles', tags=['articles'])
 
 @router.get('/')
-async def get_all_articles():
-    return [{'id': 1, 'title': 'art1', 'text': 'some text1', 'tags': [{'id': 1, 'name': 'tag1'}, {'id': 1, 'name': 'tag2'}]}, 
-            {'id': 2, 'title': 'art2', 'text': 'some text2', 'tags': [{'id': 1, 'name': 'tag2'}, {'id': 1, 'name': 'tag3'}]},
-            {'id': 3, 'title': 'art3', 'text': 'some text3', 'tags': [{'id': 1, 'name': 'tag3'}, {'id': 1, 'name': 'tag4'}]}]
+def get_all_articles(limit: Optional[int] = 3, page = 1, db: Session = Depends(get_db)):
+    
+    total_articles = db.query(Article).count()
+    total = total_articles // limit
+    if total_articles % limit > 0:
+        total += 1
+    skip = (int(page) -1) * limit
+    
+    #db.query(Article).join(Article.tags)
+    return { 'data': db.query(Article).options(joinedload(Article.tags)).offset(skip).limit(limit).all(), 'total': total}

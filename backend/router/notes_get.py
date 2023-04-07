@@ -1,9 +1,18 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from schemas import NotesDisplay
+from typing import List, Optional
+from db.database import get_db
+from db.models import Note
+
 
 router = APIRouter(prefix='/notes', tags=['notes'])
 
 @router.get('/')
-async def get_all_notes():
-    return [{'id': 1, 'text': 'some text1', 'tags': [{'id': 1, 'name': 'tag1'}, {'id': 1, 'name': 'tag2'}]}, 
-            {'id': 2, 'text': 'some text2', 'tags': [{'id': 1, 'name': 'tag2'}, {'id': 1, 'name': 'tag3'}]},
-            {'id': 3, 'text': 'some text3', 'tags': [{'id': 1, 'name': 'tag3'}, {'id': 1, 'name': 'tag4'}]}]
+def get_all_notes(limit: Optional[int] = 3, page: Optional[int] = 1, db: Session = Depends(get_db)):
+    total_notes = db.query(Note).count()
+    total = total_notes // limit
+    if total_notes % limit > 0:
+        total += 1
+    skip = (int(page) -1) * limit
+    return { 'data': db.query(Note).offset(skip).limit(limit).all(), 'total': total}

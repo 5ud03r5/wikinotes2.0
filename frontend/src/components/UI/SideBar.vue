@@ -17,17 +17,17 @@
                 </div>
                 <div>
                     <RouterLink to="/articles" class="items-center flex">
-                        <IconsArticles class="fill-gray-100 mr-2" />Articles
+                        <IconsArticles class="stroke-gray-100 mr-2" />Articles
                     </RouterLink>
                 </div>
                 <div>
                     <RouterLink to="/notes" class="items-center flex ">
-                        <IconsNotes class="fill-gray-100 mr-2" />Notes
+                        <IconsNotes class="stroke-gray-100 mr-2" />Notes
                     </RouterLink>
                 </div>
                 <div>
                     <RouterLink to="/chat" class="items-center flex ">
-                        <IconsChat class="fill-gray-100 mr-2" />Chat
+                        <IconsChat class="stroke-gray-100 mr-2" />Chat
                     </RouterLink>
                 </div>
                 <div class="absolute bottom-24 items-center flex ">
