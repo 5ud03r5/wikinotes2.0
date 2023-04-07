@@ -34,5 +34,11 @@ class Tag(Base):
     __tablename__ = 'tag'
     id = Column(UUID, primary_key=True, index=True)
     name = Column(String)
-    description = Column(Text)
+    description = Column(String)
+    created = Column(DateTime)
+    
+class Comment(Base):
+    __tablename__ = 'comment'
+    id = Column(UUID, primary_key=True, index=True)
+    body = Column(String)
     created = Column(DateTime)
