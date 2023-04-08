@@ -12,7 +12,6 @@ export const getItems = async (itemPages, endpoint, limit) => {
     throw Error("Something went wrong");
   }
   const data = await response.json();
-  console.log(data);
   return [data.data, data.total];
 };
 
@@ -28,5 +27,4 @@ export const createItem = async (endpoint, body) => {
   if (!response.ok) {
     throw Error("Something went wrong");
   }
-  console.log(await response.json());
 };

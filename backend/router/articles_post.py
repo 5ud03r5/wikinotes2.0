@@ -13,16 +13,12 @@ def create_article(request: ArticleCreate, db: Session = Depends(get_db)):
     print(request.tags)
     tags = []
     for tag in request.tags:
-        db_tag = db.query(Tag).filter(Tag.name == tag['name']).first()
-        
+        db_tag = db.query(Tag).filter(Tag.name == tag['name']).first()     
         if db_tag is None:
             new_tag = Tag(id = uuid4(), name=tag['name'])
-            tags.append(new_tag)
-            #tags.append({'name':new_tag.name, 'id': new_tag.id})
+            tags.append(new_tag)        
         else:
-            tags.append(db_tag)
-            #tags.append({'name':db_tag.name, 'id': db_tag.id})
-    print(tags)
+            tags.append(db_tag)        
     new_article = Article(
         id = uuid4(),
         title = request.title,
