@@ -26,8 +26,6 @@ def create_article(request: ArticleCreate, db: Session = Depends(get_db)):
         tags = tags,
         created = datetime.now()
     )
-    
-
     db.add(new_article)
     db.commit()
     db.refresh(new_article)

@@ -28,3 +28,16 @@ export const createItem = async (endpoint, body) => {
     throw Error("Something went wrong");
   }
 };
+
+export const removeItem = async (endpoint, id) => {
+  const response = await fetch(
+    import.meta.env.VITE_BACKEND + "/" + endpoint + "/" + id,
+    {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+  if (!response.ok) {
+    throw Error("Something went wrong");
+  }
+};

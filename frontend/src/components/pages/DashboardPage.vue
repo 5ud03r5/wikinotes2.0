@@ -10,7 +10,7 @@
                 </div>
                 <hr class="my-5" />
                 <UniversalInput :placeholder="'Search in articles...'" class="w-1/3 focus:shadow-md" />
-                <ArticleItem v-for="article in articles" :article="article" :key="article.id" />
+                <ArticleItem v-for="article in articles" :article="article" :key="article.id" @showDeleteModal="onDelete" />
                 <div class="flex justify-center absolute bottom-0 ml-auto mr-auto right-0 left-0 items-center">
                     <UniversalPagination :currentPage="articlesPage" :totalPages="articlesTotalPages"
                         @update:page="newValue => articlesPage = newValue" />
@@ -60,6 +60,9 @@
             </div>
 
         </section>
+        <teleport to="body" v-if="showDeleteModal">
+            <UniversalDisplayModal :item="title" @showDeleteModal="showDeleteModal = false" @deleteItem="deleteItem" />
+        </teleport>
 
     </div>
 </template>
@@ -70,11 +73,12 @@ import NoteItem from '../notes/NoteItem.vue';
 import UniversalButton from '../UI/UniversalButton.vue'
 import UniversalInput from '../UI/UniversalInput.vue';
 import { watchEffect, ref } from 'vue';
-import { getItems, createItem } from '../../utils/apiFetchers'
+import { getItems, createItem, removeItem } from '../../utils/apiFetchers'
 import UniversalPagination from '../UI/UniversalPagination.vue';
 import { useUiStore } from '../../store/ui';
 import { storeToRefs } from 'pinia';
 import UniversalTextarea from '../UI/UniversalTextarea.vue';
+import UniversalDisplayModal from '../UI/UniversalDisplayModal.vue';
 
 
 const store = useUiStore()
@@ -88,6 +92,18 @@ const notesTotalPages = ref(null)
 const noteText = ref('')
 const articleText = ref('')
 const articleTitle = ref('')
+const showDeleteModal = ref(false)
+const title = ref('')
+
+const deleteItem = (id) => {
+    removeItem('articles', id).then(showDeleteModal.value = false)
+
+}
+
+const onDelete = (value) => {
+    title.value = value
+    showDeleteModal.value = true
+}
 
 const noteValidation = () => {
     if (noteText.value.trim().length > 0) {
@@ -110,6 +126,6 @@ watchEffect(async () => [notes.value, notesTotalPages.value] = await getItems(no
 <script>
 export default {
     name: "DashboardPage",
-    components: { MenuBar, UniversalPagination, UniversalTextarea }
+    components: { MenuBar, UniversalPagination, UniversalTextarea, UniversalDisplayModal }
 }
 </script>
