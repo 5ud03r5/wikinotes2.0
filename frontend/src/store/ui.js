@@ -5,5 +5,7 @@ export const useUiStore = defineStore("ui", () => {
   const articlesShow = ref(true);
   const notesShow = ref(true);
   const chatShow = ref(true);
-  return { articlesShow, notesShow, chatShow };
+  const toastShow = ref(false);
+  const toastText = ref("");
+  return { articlesShow, notesShow, chatShow, toastShow, toastText };
 });

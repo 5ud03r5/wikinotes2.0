@@ -9,7 +9,11 @@
                     class="bg-gray-900 px-2 py-1 hover:cursor-pointer w-max text-gray-100">Test create
                 </div>
                 <hr class="my-5" />
-                <UniversalInput :placeholder="'Search in articles...'" class="w-1/3 focus:shadow-md" />
+                <div class="flex space-x-2">
+                    <UniversalInput :placeholder="'Search in articles...'" class="w-1/3 focus:shadow-md" />
+                    <UniversalTagInput class="ml-auto" />
+                </div>
+
                 <ArticleItem v-for="article in articles" :article="article" :key="article.id" @showDeleteModal="onDelete" />
                 <div class="flex justify-center absolute bottom-0 ml-auto mr-auto right-0 left-0 items-center">
                     <UniversalPagination :currentPage="articlesPage" :totalPages="articlesTotalPages"
@@ -24,8 +28,12 @@
                 </div>
                 <hr class="my-5" />
                 <form @submit.prevent="articleValidation" class="flex flex-col space-y-2">
-                    <UniversalInput :placeholder="'Article title...'" class="focus:shadow-md"
-                        @update:value="newValue => articleTitle = newValue" :value="articleTitle" />
+                    <div class="flex space-x-2">
+                        <UniversalInput :placeholder="'Article title...'" class="focus:shadow-md"
+                            @update:value="newValue => articleTitle = newValue" :value="articleTitle" />
+                        <UniversalTagInput class="ml-auto" />
+                    </div>
+
                     <UniversalTextarea :placeholder="'Article text...'" class="focus:shadow-md"
                         @update:value="newValue => articleText = newValue" :value="articleText" />
                     <UniversalButton class="ml-auto text-[25px]">Create article</UniversalButton>
@@ -79,10 +87,11 @@ import { useUiStore } from '../../store/ui';
 import { storeToRefs } from 'pinia';
 import UniversalTextarea from '../UI/UniversalTextarea.vue';
 import UniversalDisplayModal from '../UI/UniversalDisplayModal.vue';
+import UniversalTagInput from '../UI/UniversalTagInput.vue';
 
 
 const store = useUiStore()
-const { articlesShow, notesShow, chatShow } = storeToRefs(store)
+const { articlesShow, notesShow, chatShow, toastShow, toastText } = storeToRefs(store)
 const articles = ref([])
 const articlesPage = ref(1)
 const articlesTotalPages = ref(null)
@@ -97,7 +106,6 @@ const title = ref('')
 
 const deleteItem = (id) => {
     removeItem('articles', id).then(showDeleteModal.value = false)
-
 }
 
 const onDelete = (value) => {
@@ -117,7 +125,10 @@ const articleValidation = () => {
         createItem('articles', { title: articleTitle.value, text: articleText.value, tags: [] })
         articleText.value = ''
         articleTitle.value = ''
+        toastShow.value = true
+        toastText.value = 'Article created!'
     }
+
 }
 
 watchEffect(async () => [articles.value, articlesTotalPages.value] = await getItems(articlesPage, 'articles', 3))
@@ -126,6 +137,6 @@ watchEffect(async () => [notes.value, notesTotalPages.value] = await getItems(no
 <script>
 export default {
     name: "DashboardPage",
-    components: { MenuBar, UniversalPagination, UniversalTextarea, UniversalDisplayModal }
+    components: { MenuBar, UniversalPagination, UniversalTextarea, UniversalDisplayModal, UniversalTagInput }
 }
 </script>
