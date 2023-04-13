@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <UniversalInput :placeholder="'Search in notes...'" class="w-1/2 mx-auto flex focus:shadow-xl mb-5" />
+        <UniversalInput :placeholder="'Search in notes...'" class="flex w-1/2 mx-auto mb-5 focus:shadow-xl" />
         <NoteItem class="w-full " v-for="note in notes" :note="note" :key="note.id" />
         <UniversalPagination class="mx-auto" :currentPage="notesPage" :totalPages="notesTotalPages"
             @update:page="newValue => notesPage = newValue" />
@@ -18,5 +18,5 @@ const notesPage = ref(1)
 const notesTotalPages = ref(null)
 
 
-watchEffect(async () => [notes.value, notesTotalPages.value] = await getItems(notesPage, 'notes', 7))
+watchEffect(async () => [notes.value, notesTotalPages.value] = await getItems(notesPage.value, 'notes', 7))
 </script>

@@ -16,4 +16,5 @@ def create_article(article_id: UUID, db: Session = Depends(get_db)):
         return status.HTTP_404_NOT_FOUND
     db.delete(item)
     db.commit()
+    
     return status.HTTP_200_OK

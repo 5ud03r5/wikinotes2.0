@@ -6,11 +6,13 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import UniversalInput from './UniversalInput.vue';
 const props = defineProps({
     tags: Array,
     class: String
 })
+
 </script>
 
 <script>

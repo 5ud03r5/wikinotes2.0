@@ -16,5 +16,4 @@ def get_all_articles(limit: Optional[int] = 3, page = 1, db: Session = Depends(g
         total += 1
     skip = (int(page) -1) * limit
     
-    #db.query(Article).join(Article.tags)
     return { 'data': db.query(Article).options(joinedload(Article.tags)).offset(skip).limit(limit).all(), 'total': total}

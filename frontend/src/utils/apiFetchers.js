@@ -1,18 +1,25 @@
 export const getItems = async (itemPages, endpoint, limit) => {
+  let construct = "";
+  if (itemPages && limit) {
+    construct = "/?page=" + itemPages + "&limit=" + limit;
+  }
   const response = await fetch(
-    import.meta.env.VITE_BACKEND +
-      "/" +
-      endpoint +
-      "/" +
-      `?page=${itemPages.value}` +
-      "&limit=" +
-      limit
+    import.meta.env.VITE_BACKEND + "/" + endpoint + construct
   );
   if (!response.ok) {
     throw Error("Something went wrong");
   }
   const data = await response.json();
   return [data.data, data.total];
+};
+
+export const getTags = async () => {
+  const response = await fetch(import.meta.env.VITE_BACKEND + "/tags/");
+  if (!response.ok) {
+    throw Error("Something went wrong");
+  }
+  const data = await response.json();
+  return data;
 };
 
 export const createItem = async (endpoint, body) => {
