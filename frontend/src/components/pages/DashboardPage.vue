@@ -5,7 +5,7 @@
         <section class="flex m-1 space-x-2 " v-if="articlesShow">
             <div class="relative w-1/2 p-4 rounded-md bg-indigo-50">
                 <label class="m-1 text-[40px] font-bold">Articles</label>
-                <div @click="createItem('articles', { title: 'article', text: 'test art', tags: [{ name: 'one' }, { name: 'two' }] })"
+                <div @click="createItem('articles', { title: 'article', text: 'test art', tags: [{ name: 'two' }] })"
                     class="px-2 py-1 text-gray-100 bg-gray-900 hover:cursor-pointer w-max">Test create
                 </div>
                 <hr class="my-5" />
@@ -15,7 +15,7 @@
                         <UniversalInput :placeholder="'Enter tags...'" class=" focus:shadow-md" :value="filter"
                             @update:value="newValue => filter = newValue" />
                         <div v-if="filteredTags.length > 0 && showTags"
-                            class="bg-gray-100 outline outline-1  outline-gray-200 p-1 absolute top-12 rounded-md shadow-md w-full mx-1 z-[200]">
+                            class="bg-gray-100 outline outline-1  outline-gray-200 p-1 absolute top-12 rounded-md shadow-md w-[200px] mx-1 z-[200]">
                             <div v-for="tag in filteredTags" :key="tag.id" @click="addToList(tag)"
                                 class="px-2 m-1 hover:cursor-pointer hover:bg-gray-700 hover:text-gray-100 ">
                                 {{ tag.name }}
@@ -26,8 +26,9 @@
 
 
                 </div>
-                <ArticleSortedBy v-if="filterBy.length > 0" :tags="filterBy" />
-                <ArticleItem v-for="article in articles" :article="article" :key="article.id" @showDeleteModal="onDelete" />
+                <ArticleSortedBy v-if="filterBy.length > 0" :tags="filterBy" @update:value="deleteTags" />
+                <ArticleItem v-for="article in articles" :article="article" :key="article.id" @showDeleteModal="onDelete"
+                    class="h-[150px]" />
                 <div class="mt-10"></div>
                 <div class="absolute bottom-0 left-0 right-0 flex items-center justify-center">
                     <UniversalPagination :currentPage="articlesPage" :totalPages="articlesTotalPages"
@@ -126,15 +127,17 @@ const filterBy = ref([])
 const showTags = ref(false)
 
 const addToList = (tag) => {
-
     filterBy.value.push(tag)
     tags.value = tags.value.filter(item => item.name !== tag.name)
     filteredTags.value = filteredTags.value.filter(item => item.name !== tag.name)
     filter.value = ''
-
-
 }
 
+const deleteTags = (tag) => {
+    filterBy.value = filterBy.value.filter(item => item.name !== tag.name)
+    tags.value.push(tag)
+
+}
 
 const deleteItem = (id) => {
     if (articles.value.length === 1) {
@@ -164,7 +167,6 @@ const articleValidation = () => {
 }
 
 watch(filter, () => {
-
     if (tags.value.length > 0 && filter.value.length > 0) {
         filteredTags.value = tags.value.filter(tag => tag.name.includes(filter.value))
         showTags.value = true
@@ -177,6 +179,11 @@ watch(filter, () => {
 watchEffect(async () => [articles.value, articlesTotalPages.value] = await getItems(articlesPage.value, 'articles', 3, filterBy.value))
 watchEffect(async () => [notes.value, notesTotalPages.value] = await getItems(notesPage.value, 'notes', 3))
 watchEffect(async () => tags.value = await getTags())
+watch(articlesTotalPages, () => {
+    if (articlesPage.value > articlesTotalPages.value) {
+        articlesPage.value = articlesTotalPages.value
+    }
+})
 </script>
 <script>
 export default {

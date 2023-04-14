@@ -1,7 +1,15 @@
-export const getItems = async (itemPages, endpoint, limit) => {
-  let construct = "";
-  if (itemPages && limit) {
-    construct = "/?page=" + itemPages + "&limit=" + limit;
+export const getItems = async (itemPages, endpoint, limit, tags) => {
+  let construct = "/?page=" + itemPages + "&limit=" + limit;
+  if (tags) {
+    construct =
+      "/?page=" +
+      itemPages +
+      "&limit=" +
+      limit +
+      "&tags=" +
+      tags.map((tag) => {
+        return tag.id;
+      });
   }
   const response = await fetch(
     import.meta.env.VITE_BACKEND + "/" + endpoint + construct
