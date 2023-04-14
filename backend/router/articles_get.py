@@ -9,11 +9,10 @@ from db.models import Article, Tag, articles_tags
 router = APIRouter(prefix='/articles', tags=['articles'])
 
 @router.get('/')
-def get_all_articles(limit: Optional[int] = 3, page = 1, tags = Optional[List], db: Session = Depends(get_db)):
+def get_all_articles(limit: Optional[int] = 3, page = 1, tags: list = None, db: Session = Depends(get_db)):
        
     query = db.query(Article).options(joinedload(Article.tags))
     
-    print(tags)
     if tags:   
         tags = tags.split(',')    
         for tag in tags:

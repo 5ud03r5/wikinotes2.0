@@ -1,6 +1,6 @@
 export const getItems = async (itemPages, endpoint, limit, tags) => {
   let construct = "/?page=" + itemPages + "&limit=" + limit;
-  if (tags) {
+  if (tags != undefined) {
     construct =
       "/?page=" +
       itemPages +

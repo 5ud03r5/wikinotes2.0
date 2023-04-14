@@ -16,7 +16,8 @@
                 </div>
             </div>
         </div>
-        <ArticleSortedBy v-if="filterBy.length > 0" :tags="filterBy" @update:value="deleteTags" />
+        <ArticleSortedBy v-if="filterBy.length > 0" :tags="filterBy" @update:value="deleteTags">Filtered by:
+        </ArticleSortedBy>
         <ArticleItem v-for="article in articles" :article="article" :key="article.id" @showDeleteModal="onDelete"
             class="h-[150px]" />
         <div class="mt-10"></div>

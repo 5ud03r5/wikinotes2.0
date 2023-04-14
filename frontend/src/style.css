@@ -26,3 +26,33 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #f1f1f1;
 }
+
+h1 {
+  font-size: 35px;
+  font-weight: 900;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+strong {
+  font-weight: 900;
+}
+
+em {
+  font-style: italic;
+}
+
+blockquote {
+  padding: 5px;
+  margin-left: 5px;
+  border-left: solid rgb(122, 122, 122);
+  background-color: rgb(226, 226, 226);
+}

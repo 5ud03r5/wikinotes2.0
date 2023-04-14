@@ -5,7 +5,10 @@
             class="absolute transition-all rounded-md fill-slate-800 hover:bg-gray-400 stroke-slate-900 right-5 hover:cursor-pointer " />
         <UniversalDrop v-if="!dropHidden" @showDeleteModal="onDeleteModal({ id: article.id, title: article.title })" />
         <p class="text-[20px] font-semibold">{{ article.title }}</p>
-        <p class="">{{ article.text }}</p>
+        <div class="truncate overflow-clip max-h-[70px]">
+            <VueShowdown :markdown="article.text" />
+        </div>
+
         <div class="absolute flex justify-end mt-2 space-x-1 bottom-2 right-2">
             <UniversalTag v-for="tag in article.tags" :key="tag.id">{{ tag.name }}</UniversalTag>
         </div>
