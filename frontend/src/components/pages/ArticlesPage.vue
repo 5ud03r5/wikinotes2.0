@@ -18,5 +18,5 @@ const articlesPage = ref(1)
 const articlesTotalPages = ref(null)
 
 
-watchEffect(async () => [articles.value, articlesTotalPages.value] = await getItems(articlesPage.value, 'articles', 7))
+watchEffect(async () => [articles.value, articlesTotalPages.value] = await getItems(articlesPage.value, 'articles', 7, []))
 </script>
