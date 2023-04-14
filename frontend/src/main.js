@@ -9,7 +9,7 @@ import ArticlesPage from "./components/pages/ArticlesPage.vue";
 import { createPinia } from "pinia";
 
 const routes = [
-  { path: "/dashboard", component: DashboardPage },
+  { path: "/", component: DashboardPage },
   { path: "/notes", component: NotesPage },
   { path: "/articles", component: ArticlesPage },
   { path: "/chat", component: ChatPage },

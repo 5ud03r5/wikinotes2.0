@@ -1,37 +1,37 @@
 <template>
     <nav class="">
-        <div class="fixed text-[22px] w-max top-0 left-0 h-full bg-pink-700 text-gray-100">
+        <div class="fixed text-[22px] w-max top-0 left-0 h-full bg-slate-800 text-gray-100">
             <div>
                 <div class="flex justify-center py-8 px-6 text-[28px] items-center ">
-                    <IconsLogo class="fill-gray-100 mx-1"></IconsLogo>WikiNotes 2.0
+                    <IconsLogo class="mx-1 fill-gray-100"></IconsLogo>WikiNotes 2.0
                 </div>
                 <hr class="mx-1">
             </div>
 
 
-            <div class=" pl-8 py-5 flex flex-col space-y-2">
+            <div class="flex flex-col py-5 pl-8 space-y-2 ">
                 <div>
-                    <RouterLink to="/dashboard" class="items-center flex">
-                        <IconsDashboard class="fill-gray-100 mr-2" />Dashboard
+                    <RouterLink to="/" class="flex items-center">
+                        <IconsDashboard class="mr-2 fill-gray-100" />Dashboard
                     </RouterLink>
                 </div>
                 <div>
-                    <RouterLink to="/articles" class="items-center flex">
-                        <IconsArticles class="stroke-gray-100 mr-2" />Articles
+                    <RouterLink to="/articles" class="flex items-center">
+                        <IconsArticles class="mr-2 stroke-gray-100" />Articles
                     </RouterLink>
                 </div>
                 <div>
-                    <RouterLink to="/notes" class="items-center flex ">
-                        <IconsNotes class="stroke-gray-100 mr-2" />Notes
+                    <RouterLink to="/notes" class="flex items-center ">
+                        <IconsNotes class="mr-2 stroke-gray-100" />Notes
                     </RouterLink>
                 </div>
                 <div>
-                    <RouterLink to="/chat" class="items-center flex ">
-                        <IconsChat class="stroke-gray-100 mr-2" />Chat
+                    <RouterLink to="/chat" class="flex items-center ">
+                        <IconsChat class="mr-2 stroke-gray-100" />Chat
                     </RouterLink>
                 </div>
-                <div class="absolute bottom-24 items-center flex ">
-                    <IconsLogout class="fill-gray-100 mr-2" />Logout
+                <div class="absolute flex items-center bottom-24 ">
+                    <IconsLogout class="mr-2 fill-gray-100" />Logout
                 </div>
             </div>
 
