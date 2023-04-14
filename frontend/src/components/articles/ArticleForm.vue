@@ -20,28 +20,21 @@
                     </div>
                 </div>
                 <div class="flex justify-end ml-auto space-x-2">
-                    <UniversalButton class="">Create article</UniversalButton>
                     <div class="px-2 py-1 text-gray-200 bg-gray-900 rounded-md hover:cursor-pointer w-max hover:bg-gray-800 hover:text-gray-100"
                         @click="markdown = !markdown">{{ markdown ? 'Text' : 'Markdown'
                         }}
                     </div>
+                    <UniversalButton class="">Create article</UniversalButton>
+
                 </div>
             </div>
-
             <ArticleSortedBy v-if="filterBy.length > 0" :tags="filterBy" @update:value="deleteTags">Tags: </ArticleSortedBy>
-
-
             <UniversalTextarea v-if="!markdown" :placeholder="'Article text...'" class="focus:shadow-md"
                 @update:value="newValue => articleText = newValue" :value="articleText" />
             <div v-if="markdown" class="px-3 py-2 m-1 bg-slate-100 outline-1 outline outline-slate-300 rounded-xl">
                 <VueShowdown :markdown="articleText" />
             </div>
-
-
-
         </form>
-
-
     </div>
 </template>
 
