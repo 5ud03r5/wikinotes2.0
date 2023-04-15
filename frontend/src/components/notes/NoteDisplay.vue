@@ -1,7 +1,8 @@
 <template>
     <div>
-        <label class="m-1 text-[40px] font-bold text-slate-700">Notes</label>
-        <hr class="my-5" />
+        <div class="mb-4">
+            <UniversalLabel>Notes</UniversalLabel>
+        </div>
         <UniversalInput :placeholder="'Search in notes...'" class="focus:shadow-md" />
         <NoteItem v-for="note in notes" :note="note" :key="note.id" />
         <div class="absolute bottom-0 left-0 right-0 flex items-center justify-center w-1/2 ml-auto mr-auto">
@@ -16,6 +17,7 @@ import NoteItem from './NoteItem.vue';
 import UniversalPagination from '../UI/UniversalPagination.vue';
 import { ref, watchEffect } from 'vue';
 import { getItems } from '../../utils/apiFetchers';
+import UniversalLabel from '../UI/UniversalLabel.vue';
 const notes = ref([])
 const notesPage = ref(1)
 const notesTotalPages = ref(null)

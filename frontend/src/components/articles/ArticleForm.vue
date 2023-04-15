@@ -1,7 +1,8 @@
 <template>
     <div>
-        <label class="m-1 text-[40px] font-bold text-slate-700">Create article</label>
-        <hr class="my-5" />
+        <div class="mb-4">
+            <UniversalLabel>Create article</UniversalLabel>
+        </div>
         <form @submit.prevent="articleValidation" class="relative flex flex-col space-y-2 ">
             <div class="flex flex-wrap items-center">
                 <div class="flex items-center space-x-2">
@@ -48,6 +49,7 @@ import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUiStore } from '../../store/ui';
 import { createItem } from '../../utils/apiFetchers'
+import UniversalLabel from '../UI/UniversalLabel.vue';
 const props = defineProps({
     tags: Array
 })

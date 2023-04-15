@@ -1,7 +1,8 @@
 <template>
     <div>
-        <label class="m-1 text-[40px] font-bold text-slate-700">Create Note</label>
-        <hr class="my-5" />
+        <div class="mb-4">
+            <UniversalLabel>Create note</UniversalLabel>
+        </div>
         <form @submit.prevent="noteValidation" class="flex flex-col space-y-2">
 
             <UniversalTextarea :placeholder="'Note text...'" class="focus:shadow-md"
@@ -12,6 +13,7 @@
 </template>
 
 <script setup>
+import UniversalLabel from '../UI/UniversalLabel.vue';
 import UniversalTextarea from '../UI/UniversalTextarea.vue';
 import UniversalButton from '../UI/UniversalButton.vue';
 import { ref } from 'vue';

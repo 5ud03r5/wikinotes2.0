@@ -1,7 +1,10 @@
 <template>
-    <div>
-        <label class="m-1 text-[40px] font-bold text-slate-700">Articles</label>
-        <hr class="my-5" />
+    <div class="">
+        <div class="mb-4">
+            <UniversalLabel>Articles</UniversalLabel>
+        </div>
+
+
         <div class="flex space-x-2">
             <UniversalInput :placeholder="'Search in articles...'" class="w-1/3 focus:shadow-md" />
             <div class="relative w-1/3">
@@ -31,7 +34,7 @@
     </teleport>
 </template>
 <script setup>
-
+import UniversalLabel from '../UI/UniversalLabel.vue'
 import UniversalInput from '../UI/UniversalInput.vue';
 import ArticleSortedBy from './ArticleSortedBy.vue';
 import ArticleItem from './ArticleItem.vue';
@@ -60,7 +63,7 @@ const deleteItem = (id) => {
         articlesPage.value = articlesPage.value - 1
     }
     removeItem('articles', id).then(showDeleteModal.value = false).finally(async () => [articles.value, articlesTotalPages.value] =
-        await getItems(articlesPage.value, 'articles', 3))
+        await getItems(articlesPage.value, 'articles', 3, filterBy.value))
 }
 
 const addToList = (tag) => {
