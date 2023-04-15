@@ -15,7 +15,7 @@
                 class="w-10 h-10 transition-all hover:fill-gray-300 fill-gray-100 hover:cursor-pointer" />
 
         </div>
-        <div v-else="barHidden" class="w-[40px] hide" @click="barHidden = false" key="second">
+        <div v-else="barHidden" class="w-[40px] " @click="barHidden = false" key="second">
             <IconsArrowLeft class="w-10 h-10 transition-all hover:fill-gray-300 fill-gray-100 hover:cursor-pointer" />
         </div>
 
@@ -37,10 +37,6 @@ const barHidden = ref(true)
 </script>
 
 <style scoped>
-.hide {
-    animation: hide 0.3s forwards
-}
-
 .show {
     animation: show 0.3s forwards
 }
@@ -53,16 +49,6 @@ const barHidden = ref(true)
 
     to {
         width: 200px
-    }
-}
-
-@keyframes hide {
-    from {
-        width: 200px
-    }
-
-    to {
-        width: 40px
     }
 }
 </style>
