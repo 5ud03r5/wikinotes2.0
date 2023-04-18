@@ -11,5 +11,11 @@
 WikiNotes2.0 will be an improved version of my previous unfinished WikiNotes project.
 It aims to be a platform to allow engineers share knowledge in terms of articles and notes. It also allows for easy article/note search with easy markdown syntax based creation. 
 
-# How to use
+## Installation
+
+WikiNotes tool requires you to have docker installed on your workstation/server. First clone git repository, then run following command from root project directory:
+
+    docker compose up 
+
+It will run docker containers (backend, frontend and postgres db)
 
