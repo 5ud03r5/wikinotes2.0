@@ -1,5 +1,5 @@
 <template>
-    <label class="m-1 text-[40px] font-semibold text-slate-700 ">
+    <label class="m-1 text-[30px] font-semibold text-slate-700 ">
         <slot></slot>
     </label>
 </template>

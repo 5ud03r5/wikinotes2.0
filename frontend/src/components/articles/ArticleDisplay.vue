@@ -1,12 +1,16 @@
 <template>
     <div class="">
-        <div class="mb-4">
+        <div class="mb-4 ">
             <UniversalLabel>Articles</UniversalLabel>
         </div>
 
 
         <div class="flex space-x-2">
-            <UniversalInput :placeholder="'Search in articles...'" class="w-1/3 focus:shadow-md" />
+            <form @submit.prevent="searchFinal = search" class="">
+                <UniversalInput :placeholder="'Search in articles...'" class="focus:shadow-md" :value="search"
+                    @update:value="newValue => search = newValue" />
+            </form>
+
             <div class="relative w-1/3">
                 <UniversalInput :placeholder="'Enter tags...'" class=" focus:shadow-md" :value="filter"
                     @update:value="newValue => filter = newValue" />
@@ -19,10 +23,12 @@
                 </div>
             </div>
         </div>
-        <ArticleSortedBy v-if="filterBy.length > 0" :tags="filterBy" @update:value="deleteTags">Filtered by:
+        <ArticleSortedBy :tags="filterBy" @update:value="deleteTags">{{ filterBy.length > 0 ?
+            'Filtered By:' : 'No filters applied' }}
         </ArticleSortedBy>
+
         <ArticleItem v-for="article in articles" :article="article" :key="article.id" @showDeleteModal="onDelete"
-            class="h-[150px]" />
+            class="h-[180px]" />
         <div class="mt-10"></div>
         <div class="absolute bottom-0 left-0 right-0 flex items-center justify-center">
             <UniversalPagination :currentPage="articlesPage" :totalPages="articlesTotalPages"
@@ -46,7 +52,8 @@ const props = defineProps({
     tagsProp: Array
 })
 
-
+const searchFinal = ref('')
+const search = ref('')
 const filter = ref('')
 const filteredTags = ref([])
 const filterBy = ref([])
@@ -84,6 +91,8 @@ const onDelete = (value) => {
     showDeleteModal.value = true
 }
 
+
+
 watch(filter, () => {
     if (tags.value.length > 0 && filter.value.length > 0) {
         filteredTags.value = tags.value.filter(tag => tag.name.includes(filter.value))
@@ -104,5 +113,5 @@ watch(props, () => {
     tags.value = props.tagsProp
 })
 
-watchEffect(async () => [articles.value, articlesTotalPages.value] = await getItems(articlesPage.value, 'articles', 3, filterBy.value))
+watchEffect(async () => [articles.value, articlesTotalPages.value] = await getItems(articlesPage.value, 'articles', 3, filterBy.value, searchFinal.value))
 </script>

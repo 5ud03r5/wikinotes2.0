@@ -1,8 +1,8 @@
 <template>
-    <div class="shadow-xl bg-slate-100 py-3 px-5 m-1 rounded-md relative">
-        <IconsDots class="fill-slate-800 stroke-slate-900 absolute right-5 hover:cursor-pointer" />
+    <div class="relative px-5 py-3 m-1 bg-gray-100 rounded-md shadow-xl">
+        <IconsDots class="absolute fill-slate-800 stroke-slate-900 right-5 hover:cursor-pointer" />
         <p class="">{{ note.text }}</p>
-        <div class="flex justify-end space-x-1 mt-2">
+        <div class="flex justify-end mt-2 space-x-1">
             <UniversalTag v-for="tag in note.tags" :key="tag.id">{{ tag.name }}</UniversalTag>
         </div>
 

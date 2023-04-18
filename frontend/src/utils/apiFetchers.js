@@ -1,6 +1,18 @@
-export const getItems = async (itemPages, endpoint, limit, tags) => {
+export const getItems = async (itemPages, endpoint, limit, tags, search) => {
   let construct = "/?page=" + itemPages + "&limit=" + limit;
-  if (tags != undefined) {
+  if (search != undefined && tags != undefined) {
+    construct =
+      "/?page=" +
+      itemPages +
+      "&limit=" +
+      limit +
+      "&search=" +
+      search +
+      "&tags=" +
+      tags.map((tag) => {
+        return tag.id;
+      });
+  } else if (tags != undefined) {
     construct =
       "/?page=" +
       itemPages +
@@ -10,7 +22,10 @@ export const getItems = async (itemPages, endpoint, limit, tags) => {
       tags.map((tag) => {
         return tag.id;
       });
+  } else if (search != undefined) {
+    construct = "/?page=" + itemPages + "&limit=" + limit + "&search=" + search;
   }
+
   const response = await fetch(
     import.meta.env.VITE_BACKEND + "/" + endpoint + construct
   );
@@ -23,6 +38,17 @@ export const getItems = async (itemPages, endpoint, limit, tags) => {
 
 export const getTags = async () => {
   const response = await fetch(import.meta.env.VITE_BACKEND + "/tags/");
+  if (!response.ok) {
+    throw Error("Something went wrong");
+  }
+  const data = await response.json();
+  return data;
+};
+
+export const getItem = async (id) => {
+  const response = await fetch(
+    import.meta.env.VITE_BACKEND + "/articles/" + id
+  );
   if (!response.ok) {
     throw Error("Something went wrong");
   }

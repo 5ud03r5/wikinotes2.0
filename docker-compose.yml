@@ -1,0 +1,36 @@
+services:
+  backend:
+    build:
+      context: backend 
+    ports:
+      - 8000:8000
+    environment:
+      - DATABASE_URL=postgresql://wikinotes:wikinotes@db:5432/wikinotes
+    networks:
+      - public
+      - private
+    depends_on:
+      - db	
+  frontend:
+    build:
+      context: frontend 
+    ports:
+      - 3000:3000
+    networks:
+      - public
+    depends_on:
+    - backend	
+  db:
+    image: postgres:15.1
+    expose:
+      - 5432
+    networks:
+      - private
+    environment:
+      - POSTGRES_USER=wikinotes
+      - POSTGRES_PASSWORD=wikinotes
+      - POSTGRES_DB=wikinotes
+networks:
+  public:
+  private:
+

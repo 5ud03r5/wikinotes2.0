@@ -10,7 +10,6 @@ router = APIRouter(prefix='/articles', tags=['articles'])
 
 @router.post('/')
 def create_article(request: ArticleCreate, db: Session = Depends(get_db)):
-    print(request.tags)
     tags = []
     for tag in request.tags:
         db_tag = db.query(Tag).filter(Tag.name == tag['name']).first()     

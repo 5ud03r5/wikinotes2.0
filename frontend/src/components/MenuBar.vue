@@ -1,23 +1,22 @@
 <template>
-    <div class="fixed z-[1000]  top-5 right-0   bg-slate-900 shadow-xl py-2 justify-center rounded-md">
+    <div class="z-[1000] container fixed top-0 flex justify-end py-2 rounded-bl-md shadow-xl w-max right-0 bg-slate-900">
 
-        <div v-if="!barHidden" class="flex px-2 space-x-2 w-[200px] show" key="first">
-            <IconsArrowRight @click="barHidden = true"
-                class="w-10 h-10 transition-all hover:fill-gray-300 fill-gray-100 hover:cursor-pointer" />
+        <div class="flex flex-col px-2 space-y-2 " key="first">
+            <!-- <IconsArrowRight class="w-10 h-10 transition-all hover:fill-gray-300 fill-gray-100 hover:cursor-pointer" /> -->
             <IconsArticles @click="articlesShow = !articlesShow"
-                :class="articlesShow ? 'hover:stroke-pink-600 stroke-pink-800' : 'hover:stroke-gray-300 stroke-gray-100'"
+                :class="articlesShow ? 'hover:stroke-gray-300 stroke-gray-100' : 'hover:stroke-gray-500 stroke-gray-600'"
                 class="w-10 h-10 transition-all hover:cursor-pointer" />
             <IconsNotes @click="notesShow = !notesShow"
-                :class="notesShow ? 'hover:stroke-pink-600 stroke-pink-800' : 'hover:stroke-gray-300 stroke-gray-100'"
+                :class="notesShow ? 'hover:stroke-gray-300 stroke-gray-100' : 'hover:stroke-gray-500 stroke-gray-600'"
                 class="w-10 h-10 transition-all hover:cursor-pointer" />
             <IconsChat @click="chatShow = !chatShow"
-                :class="chatShow ? 'hover:stroke-pink-600 stroke-pink-800' : 'hover:stroke-gray-300 stroke-gray-100'"
+                :class="chatShow ? 'hover:stroke-gray-300 stroke-gray-100' : 'hover:stroke-gray-500 stroke-gray-600'"
                 class="w-10 h-10 transition-all hover:fill-gray-300 fill-gray-100 hover:cursor-pointer" />
 
         </div>
-        <div v-else="barHidden" class="w-[40px] " @click="barHidden = false" key="second">
+        <!--  <div v-else="barHidden" class="w-[40px] " @click="barHidden = false" key="second">
             <IconsArrowLeft class="w-10 h-10 transition-all hover:fill-gray-300 fill-gray-100 hover:cursor-pointer" />
-        </div>
+        </div> -->
 
     </div>
 </template>

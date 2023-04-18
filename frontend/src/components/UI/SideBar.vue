@@ -1,6 +1,6 @@
 <template>
     <nav class="">
-        <div class="fixed text-[22px] w-max top-0 left-0 h-full bg-slate-800 text-gray-100">
+        <div class="z-[2000] fixed text-[22px] w-max top-0 left-0 h-full bg-slate-800 text-gray-100">
             <div>
                 <div class="flex justify-center py-8 px-6 text-[28px] items-center ">
                     <IconsLogo class="mx-1 fill-gray-100"></IconsLogo>WikiNotes 2.0
@@ -30,7 +30,7 @@
                         <IconsChat class="mr-2 stroke-gray-100" />Chat
                     </RouterLink>
                 </div>
-                <div class="absolute flex items-center bottom-24 ">
+                <div class="absolute flex items-center bottom-16 ">
                     <IconsLogout class="mr-2 fill-gray-100" />Logout
                 </div>
             </div>
