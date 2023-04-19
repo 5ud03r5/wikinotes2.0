@@ -19,3 +19,5 @@ WikiNotes tool requires you to have docker installed on your workstation/server.
 
 It will run docker containers (backend, frontend and postgres db)
 
+If you dont want to use it as a docker, but instead use your own postgresql database, you can clone repository and modify line 9 in backend/db/database.py with your postgresql settings
+
