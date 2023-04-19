@@ -11,35 +11,33 @@
         <div :class="textClass ? 'overflow-y-scroll h-[650px]' : 'overflow-clip max-h-[70px]'">
             <VueShowdown :markdown="article.text" />
         </div>
-
         <div :class="textClass ? '' : 'absolute '" class="flex justify-end ml-auto space-x-1 right-2 bottom-2">
             <UniversalTag v-for="tag in article.tags" :key="tag.id">{{ tag.name }}</UniversalTag>
         </div>
-
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import IconsDots from '../icons/IconsDots.vue'
 import UniversalDrop from '../UI/UniversalDrop.vue';
 import UniversalTag from '../UI/UniversalTag.vue';
+
+interface Article {
+    article: { id: string, title: string, text: string, tags?: [{ name: string, id: string }] };
+    textClass: string;
+}
+const props = defineProps<Article>()
 const dropHidden = ref(true)
-const props = defineProps({
-    article: Object,
-    textClass: String
-})
 
 const emit = defineEmits(['showDeleteModal', 'getArticle'])
-const onDeleteModal = (item) => {
+const onDeleteModal = (item: object) => {
     emit('showDeleteModal', item)
     dropHidden.value = true
 }
 
-
-
 </script>
-<script>
+<script lang="ts">
 export default {
     name: "ArticleItem",
     components: { UniversalTag, UniversalDrop }

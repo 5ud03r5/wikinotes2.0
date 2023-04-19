@@ -5,13 +5,13 @@
         </div>
 
 
-        <div class="flex space-x-2">
+        <div class="flex flex-wrap">
             <form @submit.prevent="searchFinal = search" class="">
                 <UniversalInput :placeholder="'Search in articles...'" class="focus:shadow-md" :value="search"
                     @update:value="newValue => search = newValue" />
             </form>
 
-            <div class="relative w-1/3">
+            <div class="relative ">
                 <UniversalInput :placeholder="'Enter tags...'" class=" focus:shadow-md" :value="filter"
                     @update:value="newValue => filter = newValue" />
                 <div v-if="filteredTags.length > 0 && showTags"
@@ -24,7 +24,7 @@
             </div>
         </div>
         <ArticleSortedBy :tags="filterBy" @update:value="deleteTags">{{ filterBy.length > 0 ?
-            'Filtered By:' : 'No filters applied' }}
+            '' : 'No filters applied' }}
         </ArticleSortedBy>
 
         <ArticleItem v-for="article in articles" :article="article" :key="article.id" @showDeleteModal="onDelete"
@@ -48,10 +48,10 @@ import UniversalPagination from '../UI/UniversalPagination.vue';
 import { getItems, removeItem } from '../../utils/apiFetchers';
 import UniversalDisplayModal from '../UI/UniversalDisplayModal.vue';
 import { ref, watch, watchEffect } from 'vue';
+
 const props = defineProps({
     tagsProp: Array
 })
-
 const searchFinal = ref('')
 const search = ref('')
 const filter = ref('')

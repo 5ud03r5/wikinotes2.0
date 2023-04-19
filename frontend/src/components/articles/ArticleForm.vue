@@ -5,10 +5,10 @@
         </div>
         <form @submit.prevent="articleValidation" class="relative flex flex-col space-y-2 ">
             <div class="flex flex-wrap items-center">
-                <div class="flex items-center space-x-2">
+                <div class="flex flex-wrap items-center">
                     <UniversalInput :placeholder="'Article title...'" class="focus:shadow-md"
                         @update:value="newValue => articleTitle = newValue" :value="articleTitle" />
-                    <div class="relative w-1/3">
+                    <div class="relative ">
                         <UniversalInput :placeholder="'Enter tags...'" class=" focus:shadow-md" :value="filter"
                             @update:value="newValue => filter = newValue" />
                         <div v-if="filteredTags.length > 0 && showTags"
@@ -30,7 +30,8 @@
 
                 </div>
             </div>
-            <ArticleSortedBy :tags="filterBy" @update:value="deleteTags">{{ filterBy.length > 0 ? 'Tags:' : 'No tags added' }}
+            <ArticleSortedBy :tags="filterBy" @update:value="deleteTags">{{ filterBy.length > 0 ? null : 'No tags added'
+            }}
             </ArticleSortedBy>
             <UniversalTextarea v-if="!markdown" :placeholder="'Article text...'" class="focus:shadow-md"
                 @update:value="newValue => articleText = newValue" :value="articleText" />

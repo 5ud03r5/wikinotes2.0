@@ -11,16 +11,22 @@
         </div>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import UniversalTag from '../UI/UniversalTag.vue';
 import IconsX from '../icons/IconsX.vue'
-const emit = defineEmits(['update:value'])
-const props = defineProps({
-    tags: Array
-})
+const emit = defineEmits<{
+    (e: 'update:value', value: string): void
+}>()
+interface Tags {
+    tags: {
+        name: string;
+        id: string
+    }[]
+}
+const props = defineProps<Tags>()
 </script>
 
-<script>
+<script lang="ts">
 export default {
     name: 'ArticleSortedBy'
 }
