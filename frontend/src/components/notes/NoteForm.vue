@@ -12,7 +12,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import UniversalLabel from '../UI/UniversalLabel.vue';
 import UniversalTextarea from '../UI/UniversalTextarea.vue';
 import UniversalButton from '../UI/UniversalButton.vue';

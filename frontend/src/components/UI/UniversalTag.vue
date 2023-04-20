@@ -1,15 +1,15 @@
 <template>
-    <div class="bg-slate-800 px-2 py-1 rounded-md text-white">
+    <div class="px-2 py-1 text-white rounded-md bg-slate-800">
         <slot></slot>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
     tag: String
 })
 </script>
 
-<script>
+<script lang="ts">
 export default {
     name: 'UniversalTag'
 }

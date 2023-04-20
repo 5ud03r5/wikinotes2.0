@@ -14,14 +14,14 @@
 <script setup lang="ts">
 import UniversalTag from '../UI/UniversalTag.vue';
 import IconsX from '../icons/IconsX.vue'
+import { Tag } from '../../utils/interfaces'
+
 const emit = defineEmits<{
-    (e: 'update:value', value: string): void
+    (e: 'update:value', value: Tag): void;
 }>()
+
 interface Tags {
-    tags: {
-        name: string;
-        id: string
-    }[]
+    tags: Tag[]
 }
 const props = defineProps<Tags>()
 </script>

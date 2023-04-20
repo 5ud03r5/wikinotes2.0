@@ -21,9 +21,7 @@
     </div>
 </template>
 
-<script setup>
-import IconsArrowLeft from './icons/IconsArrowLeft.vue';
-import IconsArrowRight from './icons/IconsArrowRight.vue';
+<script setup lang="ts">
 import IconsArticles from './icons/IconsArticles.vue';
 import IconsChat from './icons/IconsChat.vue';
 import IconsNotes from './icons/IconsNotes.vue';
@@ -32,7 +30,13 @@ import { useUiStore } from '../store/ui';
 import { storeToRefs } from 'pinia';
 const store = useUiStore()
 const { articlesShow, notesShow, chatShow } = storeToRefs(store)
-const barHidden = ref(true)
+
+</script>
+
+<script lang="ts">
+export default {
+    name: 'MenuBar'
+}
 </script>
 
 <style scoped>

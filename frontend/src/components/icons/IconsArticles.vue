@@ -13,8 +13,8 @@
     </svg>
 </template>
   
-<script>
+<script lang="ts">
 export default {
-    name: 'SystemUiconsBookText'
+    name: 'IconsArticles'
 }
 </script>

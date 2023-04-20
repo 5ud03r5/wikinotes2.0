@@ -6,8 +6,8 @@
     </svg>
 </template>
   
-<script>
+<script lang="ts">
 export default {
-    name: 'BytesizeChevronRight'
+    name: 'IconsArrowRight'
 }
 </script>

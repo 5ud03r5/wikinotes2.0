@@ -42,20 +42,24 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 import UniversalTextarea from '../UI/UniversalTextarea.vue';
 import UniversalButton from '../UI/UniversalButton.vue';
 import UniversalInput from '../UI/UniversalInput.vue';
 import ArticleSortedBy from './ArticleSortedBy.vue';
-import { ref, watch } from 'vue';
+import { Ref, ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUiStore } from '../../store/ui';
 import { createItem } from '../../utils/apiFetchers'
 import UniversalLabel from '../UI/UniversalLabel.vue';
-const props = defineProps({
-    tags: Array
-})
+import { Tag } from '../../utils/interfaces'
+
+interface Props {
+    tags: Tag[]
+}
+
+const props = defineProps<Props>()
 const store = useUiStore()
 const markdown = ref(false)
 const { toastShow, toastText } = storeToRefs(store)
@@ -63,8 +67,8 @@ const articleTitle = ref('')
 const articleText = ref('')
 const tags = ref(props.tags)
 const filter = ref('')
-const filteredTags = ref([])
-const filterBy = ref([])
+const filteredTags: Ref<Tag[]> = ref([])
+const filterBy: Ref<Tag[]> = ref([])
 const showTags = ref(false)
 
 const articleValidation = () => {
@@ -84,13 +88,13 @@ const changeFormat = () => {
         markdown.value = !markdown.value
     }
 }
-const addToList = (tag) => {
+const addToList = (tag: { name: string, id: string }) => {
     filterBy.value.push(tag)
     tags.value = tags.value.filter(item => item.name !== tag.name)
     filteredTags.value = filteredTags.value.filter(item => item.name !== tag.name)
     filter.value = ''
 }
-const deleteTags = (tag) => {
+const deleteTags = (tag: { name: string, id: string }) => {
     filterBy.value = filterBy.value.filter(item => item.name !== tag.name)
     tags.value.push(tag)
 

@@ -1,4 +1,14 @@
-export const getItems = async (itemPages, endpoint, limit, tags, search) => {
+import { Tag } from "./interfaces";
+
+const BACKEND = "http://127.0.0.1:8000";
+
+export const getItems = async (
+  itemPages: number,
+  endpoint: string,
+  limit: number,
+  tags?: Tag[],
+  search?: string
+) => {
   let construct = "/?page=" + itemPages + "&limit=" + limit;
   if (search != undefined && tags != undefined) {
     construct =
@@ -26,9 +36,7 @@ export const getItems = async (itemPages, endpoint, limit, tags, search) => {
     construct = "/?page=" + itemPages + "&limit=" + limit + "&search=" + search;
   }
 
-  const response = await fetch(
-    import.meta.env.VITE_BACKEND + "/" + endpoint + construct
-  );
+  const response = await fetch(BACKEND + "/" + endpoint + construct);
   if (!response.ok) {
     throw Error("Something went wrong");
   }
@@ -37,7 +45,7 @@ export const getItems = async (itemPages, endpoint, limit, tags, search) => {
 };
 
 export const getTags = async () => {
-  const response = await fetch(import.meta.env.VITE_BACKEND + "/tags/");
+  const response = await fetch(BACKEND + "/tags/");
   if (!response.ok) {
     throw Error("Something went wrong");
   }
@@ -45,10 +53,8 @@ export const getTags = async () => {
   return data;
 };
 
-export const getItem = async (id) => {
-  const response = await fetch(
-    import.meta.env.VITE_BACKEND + "/articles/" + id
-  );
+export const getItem = async (id: string) => {
+  const response = await fetch(BACKEND + "/articles/" + id);
   if (!response.ok) {
     throw Error("Something went wrong");
   }
@@ -56,28 +62,22 @@ export const getItem = async (id) => {
   return data;
 };
 
-export const createItem = async (endpoint, body) => {
-  const response = await fetch(
-    import.meta.env.VITE_BACKEND + "/" + endpoint + "/",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    }
-  );
+export const createItem = async (endpoint: string, body: object) => {
+  const response = await fetch(BACKEND + "/" + endpoint + "/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
   if (!response.ok) {
     throw Error("Something went wrong");
   }
 };
 
-export const removeItem = async (endpoint, id) => {
-  const response = await fetch(
-    import.meta.env.VITE_BACKEND + "/" + endpoint + "/" + id,
-    {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    }
-  );
+export const removeItem = async (endpoint: string, id: string) => {
+  const response = await fetch(BACKEND + "/" + endpoint + "/" + id, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
   if (!response.ok) {
     throw Error("Something went wrong");
   }

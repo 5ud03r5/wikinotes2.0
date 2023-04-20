@@ -12,8 +12,8 @@
     </svg>
 </template>
   
-<script>
+<script lang="ts">
 export default {
-    name: 'SystemUiconsMessageWriting'
+    name: 'IconsChat'
 }
 </script>

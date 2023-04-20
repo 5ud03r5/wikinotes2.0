@@ -7,11 +7,18 @@
         </div>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
     totalPages: Number,
     currentPage: Number
 })
 const emit = defineEmits(['update:page'])
+
+</script>
+
+<script lang="ts">
+export default {
+    name: "UniversalPagination"
+}
 
 </script>

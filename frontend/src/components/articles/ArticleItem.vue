@@ -3,7 +3,7 @@
         <IconsDots @click="dropHidden = !dropHidden"
             :class="!dropHidden && 'bg-gray-700 fill-slate-100 stroke-slate-100 rounded-md shadow-md '"
             class="absolute transition-all rounded-md fill-slate-800 hover:bg-gray-400 stroke-slate-900 right-5 hover:cursor-pointer " />
-        <UniversalDrop v-if="!dropHidden" @showDeleteModal="onDeleteModal({ id: article.id, title: article.title })" />
+        <UniversalDrop v-if="!dropHidden" @showDeleteModal="onDeleteModal(article)" />
         <p class="text-[20px] font-semibold hover:cursor-pointer overflow-clip" @click="$emit('getArticle', article.id)">{{
             article.title
         }}</p>
@@ -22,16 +22,17 @@ import { ref } from 'vue';
 import IconsDots from '../icons/IconsDots.vue'
 import UniversalDrop from '../UI/UniversalDrop.vue';
 import UniversalTag from '../UI/UniversalTag.vue';
+import { Article } from '../../utils/interfaces'
 
-interface Article {
-    article: { id: string, title: string, text: string, tags?: [{ name: string, id: string }] };
+interface Props {
+    article: Article;
     textClass: string;
 }
-const props = defineProps<Article>()
+const props = defineProps<Props>()
 const dropHidden = ref(true)
 
 const emit = defineEmits(['showDeleteModal', 'getArticle'])
-const onDeleteModal = (item: object) => {
+const onDeleteModal = (item: Article) => {
     emit('showDeleteModal', item)
     dropHidden.value = true
 }

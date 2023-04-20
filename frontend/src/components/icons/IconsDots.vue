@@ -9,8 +9,8 @@
     </svg>
 </template>
   
-<script>
+<script lang="ts">
 export default {
-    name: 'BytesizeEllipsisVertical'
+    name: 'IconsDots'
 }
 </script>

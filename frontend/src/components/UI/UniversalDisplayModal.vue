@@ -9,25 +9,28 @@
         <p class="text-center py-2 text-[18px]">
             Are you sure you want to delete {{ item.title }}?
         </p>
-        <div class="flex space-x-2 bottom-2 right-2 absolute">
+        <div class="absolute flex space-x-2 bottom-2 right-2">
             <UniversalButton @click="$emit('deleteItem', item.id)">Yes</UniversalButton>
             <UniversalButton @click="$emit('showDeleteModal')">No</UniversalButton>
         </div>
 
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import UniversalButton from './UniversalButton.vue';
-import { removeItem } from '../../utils/apiFetchers';
-const props = defineProps({
-    item: Object
-})
+import { Article } from '../../utils/interfaces';
+
+interface Props {
+    item: Article
+}
+
+const props = defineProps<Props>()
 const emit = defineEmits(['showDeleteModal', 'deleteItem'])
 
 
 </script>
 
-<script>
+<script lang="ts">
 
 export default {
     name: "UniversalDisplayModal",

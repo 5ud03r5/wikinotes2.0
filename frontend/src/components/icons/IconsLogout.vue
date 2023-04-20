@@ -7,8 +7,8 @@
     </svg>
 </template>
   
-<script>
+<script lang="ts">
 export default {
-    name: 'GameIconsOpenGate'
+    name: 'IconsLogout'
 }
 </script>
