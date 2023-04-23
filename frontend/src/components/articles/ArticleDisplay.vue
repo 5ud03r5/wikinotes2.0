@@ -108,9 +108,14 @@ watch(filter, () => {
 })
 
 watch(articlesTotalPages, () => {
+
     if (articlesPage.value > articlesTotalPages.value!) {
         articlesPage.value = articlesTotalPages.value!
     }
+    if (articlesPage.value === 0 && articlesTotalPages.value! > 0) {
+        articlesPage.value = 1
+    }
+
 })
 
 watch(props, () => {

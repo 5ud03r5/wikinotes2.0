@@ -18,10 +18,8 @@ def get_all_articles(limit: Optional[int] = 3, page = 1, tags = Optional[list], 
             query = query.filter(Article.tags.any(Tag.id == tag))
         query = query.filter(and_(*(Article.tags.any(Tag.id == tag) for tag in tags))).filter(Article.text.contains(search))
 
-    elif search:
-        
+    elif search:  
         query = query.filter(Article.text.contains(search))
-
     elif tags:   
         tags = tags.split(',')    
         for tag in tags:
@@ -35,4 +33,5 @@ def get_all_articles(limit: Optional[int] = 3, page = 1, tags = Optional[list], 
     total = total_articles // limit
     if total_articles % limit > 0:
         total += 1
+    print(total)
     return { 'data': query.offset(skip).limit(limit).all(), 'total': total}
